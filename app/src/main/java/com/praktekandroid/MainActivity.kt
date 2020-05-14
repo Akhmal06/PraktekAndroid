@@ -1,10 +1,12 @@
 package com.praktekandroid
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,6 +20,10 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText( this, "hai",Toast.LENGTH_SHORT).show()
         })
 
+        button1.setOnClickListener{
+            val intent  = Intent(this@MainActivity, HitungActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 }
