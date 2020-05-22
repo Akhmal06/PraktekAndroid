@@ -13,13 +13,19 @@ private const val KERTAS = 3
 
 class GameActivity : AppCompatActivity() {
 
+    companion object{
+        const val EXTRA_USER = "username"
+    }
+
+    var username:String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
+        username = intent.getStringExtra(EXTRA_USER)
+
         var pilihanKomputer:Int
         var pilihanPlayer:Int
-
 
         buttonBatu.setOnClickListener{
             textPlayer.text = "BATU"
@@ -55,6 +61,7 @@ class GameActivity : AppCompatActivity() {
                 showPilihanKomputer(pilihanKomputer)
             }, 2000)
         }
+
     }
 
     fun getPilihanKomputer():Int{
@@ -62,23 +69,25 @@ class GameActivity : AppCompatActivity() {
     }
 
     fun suwit(pilihanPlayer: Int, pilihanKomputer: Int):String{
-        var hasil: Comparable<String>
-        if(pilihanPlayer == pilihanKomputer) {
+        var hasil: String= ""
+        if(pilihanPlayer == pilihanKomputer){
             hasil = "SERI"
             textHasil.setTextColor(Color.GRAY)
         }
         else if((pilihanPlayer == BATU && pilihanKomputer == KERTAS) ||
             (pilihanPlayer == GUNTING && pilihanKomputer == BATU) ||
-            (pilihanPlayer == KERTAS && pilihanKomputer == GUNTING)) {
-            hasil = "YOU LOSE"
+            (pilihanPlayer == KERTAS && pilihanKomputer == GUNTING)){
+            hasil = username + " LOSE"
             textHasil.setTextColor(Color.RED)
         }
-        else {
-            hasil = "YOU WIN"
+        else{
+            hasil = username + " WIN"
             textHasil.setTextColor(Color.GREEN)
         }
+
         return hasil
     }
+
     fun showPilihanKomputer(pilihanKomputer: Int){
         when(pilihanKomputer){
             1 -> textKomputer.text = "Komputer memilih: BATU"
@@ -86,6 +95,7 @@ class GameActivity : AppCompatActivity() {
             3 -> textKomputer.text = "Komputer memilih: KERTAS"
         }
     }
+
 
 
 }
